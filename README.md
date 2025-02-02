@@ -196,7 +196,7 @@ param_grid = {
 }
 xgb_reg = XGBRegressor()
 grid_search = GridSearchCV(xgb_reg, param_grid, cv=5,verbose=1, n_jobs=1,scoring='r2')
-grid_search.fit(X_train_final,y_train)
+grid_search.fit(X_train,y_train)
 
 y_pred = xgb_reg.predict(X_test_final)
 evaluataion(y_test,y_pred)
@@ -217,11 +217,10 @@ r2_score:  0.9684012545661528
 ##### 피드백 
 - 평가 값은 선형 회귀 모델에 비해 떨어지는걸 확인 가능하다. (그럼에도 여전히 좋은 평가 수치라 판단 가능)
 - 하지만 반대로 실측값을 통한 예측은 오히려 더 오차 범위가 줄어든것을 확인할 수 있었다.
-  - 예측되는 이유
-    1. 과적합
+  - 예측되는 가설
+    1. 확실한 데이터 전처리
     2. 비선형성 데이터 모델
-  - XGBoost회귀모델이 선형 회귀 모델보다 예측값이 실측값에 더 가까운 이유는 평가 점수는 전체적인 성능을 보여주지만, 실제 예측 결과에서는 모델이 데이터를 얼마나 잘 학습했는지가 더 중요하다.
-  - XGBoost는 오차가 적고 복잡한 관계를 잘 처리하기 때문에 실제 예측에서 더 좋은 결과를 낼 수 있다.
+  - 선형 모델은 평가지표에 해당하는 수치를 최소화하는 방식으로 학습하고 데이터 간 비선형 데이터가 존재할수 있기에 더 자세하게 데이터를 분석하고 학습을 위한 훈련 데이터로서 처리하는 방식으로 다시 모델을 학습시킬 계획이다.
 
 ---
 ## 피드백 후
