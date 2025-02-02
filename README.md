@@ -272,7 +272,7 @@ r2_score:  0.9684012545661528
 
 
 * VIF점수 확인을 통해 제거한 변수는 다음과 같다.
-* Year, Infant_deaths, Thinness_five_nine_years, Country_encoded, Country, Region
+* Year, Infant_deaths, Thinness_five_nine_years
 
 
 ##### Scailing
