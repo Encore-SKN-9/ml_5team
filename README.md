@@ -130,9 +130,9 @@
 
 ---
 
-## Before Feedback
+## ☑️Before Feedback
 
-###  Data Preprocessing
+###  🔎Data Preprocessing
 - **기본적인 데이터 전처리 진행**
 - 영향이 적을것 같은 데이터 임의로 제거
   - 나라명, 대륙명, 연도 제거
@@ -143,7 +143,7 @@
 <code>X_train_scaled = scaler.fit_transform(X_train)</code>
 <code>X_test_scaled = scaler.transform(X_test)</code>
 
-### Model Training and Evaluation
+### 🔎Model Training and Evaluation
 #### ***1. 선형 회귀 모델 (Linear Regressor)***
 
 <code>li_reg = LinearRegression()</code>
@@ -223,9 +223,9 @@ r2_score:  0.9684012545661528
   - 선형 모델은 평가지표에 해당하는 수치를 최소화하는 방식으로 학습하고 데이터 간 비선형 데이터가 존재할수 있기에 더 자세하게 데이터를 분석하고 학습을 위한 훈련 데이터로서 처리하는 방식으로 다시 모델을 학습시킬 계획이다.
 
 ---
-## After Feedback
-### Data Preprocessing
-**Encoding**
+## ✅After Feedback
+### 🔎Data Preprocessing
+##### Encoding
 * 범주형 변수인 `Region`, `Country`에 한하여 인코딩 적용
   * `Region`에 대해 원-핫 인코딩 적용 
   ```python
@@ -239,7 +239,7 @@ r2_score:  0.9684012545661528
   ```
   >`Country` 컬럼에 원-핫 인코딩 적용시 차원수가 급격히 증가하기에 라벨 인코딩 선택
 
-**Correlation Analysis & Feature Selection**
+##### Correlation Analysis & Feature Selection
 * 기대수명과 수치형 변수간의 상관계수 계산
 `corr_matrix = numeric_df.corr()`
 
@@ -249,7 +249,7 @@ r2_score:  0.9684012545661528
 
 * 기대수명과 중간 이상의 상관관계가 존재하는 변수만 선택
 
-**Multicollinearity Removal**
+##### Multicollinearity Removal
 * 설명변수들 간에 높은 상관관계가 있을 경우 다중공선성(Multicollinearity) 문제 발생 가능. 
   * 이를 해결하기 위해 VIF(Variance Inflation Factor) 점수를 확인하여, 높은 점수를 가진 변수를 선택적으로 제거.
 
@@ -270,7 +270,7 @@ r2_score:  0.9684012545661528
 * VIF점수 확인을 통해 제거한 변수는 다음과 같다.
 * `Year`, `Infant_deaths`, `Thinness_five_nine_years`, `Country_encoded`, `Country`, `Region`
 
-**Scailing**
+##### Scailing
 ```python
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
@@ -278,11 +278,132 @@ X_test_scaled = scaler.transform(X_test)
 ```
 * `StandardScaler() 적용`
 
-### 모델 학습 및 평가
-- 여기 작성 예정
+### 🔎Model Training and Evaluation
+>모든 모델은 `GridSearchCV`를 활용하여 최적의 하이퍼파라미터를 찾은 후 학습을 진행.
+#### *1. LinearRegressor*
+<code>lr_model.fit(X_train_scaled, y_train)</code>
+
+##### 성능 평가
+
+<code>evaluataion(y_test, y_pred_lr)</code>
+
+```explain Text
+mse:  1.101358232840826
+rmse:  1.049456160514019
+mae:  0.826333845987011
+msle:  0.00025358165738405405
+rmsle:  0.01592424746680527
+r2_score:  0.9877339630657576
+```
+<img src='./readme_images/after_lin_reg_graph.png'>
+
+##### 예측 결과
+<code>korea_pred(lr_model)</code>
+```explain Text
+예측값: 82.27684908076387
+실제값: 79.16
+예측 오차: 3.1168490807638705
+```
+
+##### 피드백
+- 선형회귀 모델은 평가 지표에선 뛰어난 성능을 보이는 반면 예측값에선 큰 오차 범위를 보여주고 있다.
+- 아까와 같이 선형 모델에서 이런건지 다른 모델을 학습해보면서 확인해볼 예정이다.
+
+#### *2. XGBoost Regressor*
+
+`xgb_model = xgb.XGBRegressor(random_state=42)`
+
+##### 모델 평가
+```plainText
+mse:  2.2109802051878247
+rmse:  1.4869365168654056
+mae:  1.192643631829156
+msle:  0.0006018966592717637
+rmsle:  0.024533582275561874
+r2_score:  0.9753758912867433
+```
+<img src='./readme_images/after_xgb_graph.png'>
+
+##### 예측 결과
+<code>korea_pred(xgb_model)</code>
+```plain Text
+예측값: 76.37752532958984
+실제값: 79.16
+예측 오차: 2.782474670410153
+```
+
+##### 피드백
+- XGBoost 모델은 평가 지표에선 기본 선형회귀보다 낮은 성능을 보이는 반면 예측값에선 적은 오차 범위를 보여주고 있다.
+- 전처리를 하기 전과 비교해보았을 때는 나은 성능을 보이는 것을 확인된다.
+
+
+#### *3. Random Forest Regressor*
+<code>rf_model = RandomForestRegressor(random_state=42)</code>
+
+##### 모델 평가
+<code>evaluataion(y_test, y_pred_rf)</code>
+```plain Text
+mse:  2.194333538302962
+rmse:  1.481328301998906
+mae:  1.1965381944444513
+msle:  0.0005621486868380423
+rmsle:  0.023709674962724442
+r2_score:  0.975561288394381
+```
+<img src='./readme_images/after_rfg_graph.png'>
+
+
+##### 예측 결과
+<code>korea_pred(rf_model)</code>
+```plain Text
+예측값: 79.36859375000009
+실제값: 79.16
+예측 오차: 0.20859375000009095
+```
+
+##### 피드백
+- Random Forest 모델 또한 평가 지표상에선 기본 선형회귀보다 낮은 성능을 보이는 반면 실제 예측 오차는 0.2로 가장 적은 오차 범위를 보여주고 있다.
+
+#### *4. VotingRegressor*
+* `RandomForestRegressor`와 `GradientBoostingRegressor` 모델을 학습시킨 후, `VotingRegressor를` 사용하여 앙상블을 수행
+
+```python
+voting_model = VotingRegressor([
+    ('rf', rf_model), 
+    ('gb', gb_model)
+])
+voting_model.fit(X_train, y_train)
+```
+
+##### 모델 평가
+<code>evaluataion(y_test, y_pred_voting)</code>
+```plain Text
+mse:  1.8332152589246904
+rmse:  1.3539627982055824
+mae:  1.132669451444312
+msle:  0.0004502115988773254
+rmsle:  0.021218190282805114
+r2_score:  0.979583131624316
+```
+<img src='./readme_images/after_ensemble_graph.png'>
+
+
+##### 예측 결과
+<code>korea_pred(voting_model)</code>
+```plain Text
+예측값: 78.29209613990288
+실제값: 79.16
+예측 오차: 0.8679038600971154
+```
+
+##### 피드백
+* 단일 Random Forest 모델보다 평가 지표상 성능이 더 좋아 보이지만, 실제 예측 오차는 오히려 더 크게 나타난다.
 
 ### 최종 피드백 및 모델 선정
-- 여기 작성 예정
+
+- 현재 단일 랜덤포레스트와 다른 앙상블 모델을 비교했을 때 실제 성능 차이가 유의미하게 나지 않는다. 
+- 단일 모델만 사용하는것이 메모리 사용량이 적고 예측속도 또한 차이가 있기에 우리가 이 프로젝트를 위해 최종적으로 사용할 모델은 랜덤포레스트가 적합하다 판단하고 있다. 
+
 ---
 
 
