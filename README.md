@@ -72,15 +72,14 @@
 ### 프로젝트 목표
 - 머신러닝의 모델을 활용하여 기대수명 예측하는 모델을 개발하는 것을 목표로 한다.
 이를 위해 채택한 데이터셋을 전처리하고 여러 모델을 비교및 분석하여 최적의 성능을 보이는 모델 선정한다.
-- 이렇게 학습한 모델의 평균지표와 실제 예측의 실효성을 높이는 과정을 보여주는것을 목적으로 한다.
+- 이렇게 학습한 모델의 평균지표와 실제 예측의 실효성을 높이는 과정을 보여주는것을 목표로 한다.
 
 <br>
 
 ---
 
 # 💗Machine Learning
-## ✅ML Process
-### 1. 데이터셋 개요<br>
+## ✅Dataset Overview <br>
 * 해당 데이터셋은 다양한 국가의 평균 수명에 영향을 미치는 데이터를 통합한 것으로, 사회경제적 요인과 건강 관련 지표도 함께 제공한다.
 **데이터 출처**
 [![Kaggle](https://img.shields.io/badge/Kaggle-Dataset-blue?logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/shreyasg23/life-expectancy-averaged-dataset/code)
@@ -136,12 +135,17 @@
 - **기본적인 데이터 전처리 진행**
 - 영향이 적을것 같은 데이터 임의로 제거
   - 나라명, 대륙명, 연도 제거
-<code>columns_to_drop = ['Country', 'Region', 'Year']</code>
-<code>data = data.drop(columns=columns_to_drop)</code>
+    
+    <code>columns_to_drop = ['Country', 'Region', 'Year']</code>
+
+    <code>data = data.drop(columns=columns_to_drop)</code>
+
 - 경제 상태(=econmy_status)의 경우 1(=좋음) 과 0(=나쁨)으로 나누는 레벨 데이터이기에 표준화(=StandardScaler)사용 없이 진행
 - 훈련 데이터 & 테스트 데이터 정규화
-<code>X_train_scaled = scaler.fit_transform(X_train)</code>
-<code>X_test_scaled = scaler.transform(X_test)</code>
+
+    <code>X_train_scaled = scaler.fit_transform(X_train)</code>
+
+    <code>X_test_scaled = scaler.transform(X_test)</code>
 
 ### 🔎Model Training and Evaluation
 #### ***1. 선형 회귀 모델 (Linear Regressor)***
@@ -247,10 +251,10 @@ r2_score:  0.9684012545661528
   <img src="./readme_images/output.png" height="70%" width="70%">
 </div>
 
-* 기대수명과 중간 이상의 상관관계가 존재하는 변수만 선택
+* 기대수명과 0.4 이상의 상관관계가 존재하는 변수만 선택
 
 ##### Multicollinearity Removal
-* 설명변수들 간에 높은 상관관계가 있을 경우 다중공선성(Multicollinearity) 문제 발생 가능. 
+* 설명변수들 간에 높은 상관관계가 있을 경우 다중공선성(Multicollinearity, 설명변수 간의 강한 상관관계) 문제 발생 가능. 
   * 이를 해결하기 위해 VIF(Variance Inflation Factor) 점수를 확인하여, 높은 점수를 가진 변수를 선택적으로 제거.
 
 | Variable                      | VIF           |  Variable                      | VIF           |
@@ -268,7 +272,8 @@ r2_score:  0.9684012545661528
 
 
 * VIF점수 확인을 통해 제거한 변수는 다음과 같다.
-* `Year`, `Infant_deaths`, `Thinness_five_nine_years`, `Country_encoded`, `Country`, `Region`
+* Year, Infant_deaths, Thinness_five_nine_years, Country_encoded, Country, Region
+
 
 ##### Scailing
 ```python
@@ -399,7 +404,7 @@ r2_score:  0.979583131624316
 ##### 피드백
 * 단일 Random Forest 모델보다 평가 지표상 성능이 더 좋아 보이지만, 실제 예측 오차는 오히려 더 크게 나타난다.
 
-### 최종 피드백 및 모델 선정
+## ✅ 최종 피드백 및 모델 선정
 
 - 현재 단일 랜덤포레스트와 다른 앙상블 모델을 비교했을 때 실제 성능 차이가 유의미하게 나지 않는다. 
 - 단일 모델만 사용하는것이 메모리 사용량이 적고 예측속도 또한 차이가 있기에 우리가 이 프로젝트를 위해 최종적으로 사용할 모델은 랜덤포레스트가 적합하다 판단하고 있다. 
@@ -407,7 +412,7 @@ r2_score:  0.979583131624316
 ---
 
 
-### 5. 프로젝트 기대 효과
+# 💗 프로젝트 기대 효과
 - 본 프로젝트에서는 기존의 경험적 추론에 의존하지 않고, 데이터 기반으로 보다 신뢰성 높은 예측을 제공
 
 - 추후에 본프로젝트에서 더 나아가서 기대수명 증가로 인한 연금 수급자 증가 문제를 예측하고, 국민연금 개혁 및 고령화 사회 대비 정책 수립에 기여할 수 있다.
