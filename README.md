@@ -348,12 +348,12 @@ r2_score:  0.9753758912867433
 ##### 모델 평가
 <code>evaluataion(y_test, y_pred_rf)</code>
 ```plain Text
-mse:  2.194333538302962
-rmse:  1.481328301998906
-mae:  1.1965381944444513
-msle:  0.0005621486868380423
-rmsle:  0.023709674962724442
-r2_score:  0.975561288394381
+mse:  2.194148954074446
+rmse:  1.4812659970695492
+mae:  1.19654427083334
+msle:  0.0005621200999806988
+rmsle:  0.02370907210290396
+r2_score:  0.9755633441441789
 ```
 <img src='./readme_images/after_rfg_graph.png'>
 
@@ -361,13 +361,13 @@ r2_score:  0.975561288394381
 ##### 예측 결과
 <code>korea_pred(rf_model)</code>
 ```plain Text
-예측값: 79.36859375000009
+예측값: 79.0389687500001
 실제값: 79.16
-예측 오차: 0.20859375000009095
+예측 오차: 0.121031249999902
 ```
 
 ##### 피드백
-- Random Forest 모델 또한 평가 지표상에선 기본 선형회귀보다 낮은 성능을 보이는 반면 실제 예측 오차는 0.2로 가장 적은 오차 범위를 보여주고 있다.
+- Random Forest 모델 또한 평가 지표상에선 기본 선형회귀보다 낮은 성능을 보이는 반면 실제 예측 오차는 0.1로 가장 적은 오차 범위를 보여주고 있다.
 
 #### *4. VotingRegressor*
 * `RandomForestRegressor`와 `GradientBoostingRegressor` 모델을 학습시킨 후, `VotingRegressor를` 사용하여 앙상블을 수행
@@ -383,12 +383,12 @@ voting_model.fit(X_train, y_train)
 ##### 모델 평가
 <code>evaluataion(y_test, y_pred_voting)</code>
 ```plain Text
-mse:  1.8332152589246904
-rmse:  1.3539627982055824
-mae:  1.132669451444312
-msle:  0.0004502115988773254
-rmsle:  0.021218190282805114
-r2_score:  0.979583131624316
+mse:  1.8331477334836315
+rmse:  1.3539378617512812
+mae:  1.132672489638757
+msle:  0.00045020182523947946
+rmsle:  0.021217959968844305
+r2_score:  0.9795838836680465
 ```
 <img src='./readme_images/after_ensemble_graph.png'>
 
@@ -396,9 +396,9 @@ r2_score:  0.979583131624316
 ##### 예측 결과
 <code>korea_pred(voting_model)</code>
 ```plain Text
-예측값: 78.29209613990288
+예측값: 79.32571002793755
 실제값: 79.16
-예측 오차: 0.8679038600971154
+예측 오차: 0.16571002793754985
 ```
 
 ##### 피드백
@@ -407,7 +407,16 @@ r2_score:  0.979583131624316
 ## ✅ 최종 피드백 및 모델 선정
 
 - 현재 단일 랜덤포레스트와 다른 앙상블 모델을 비교했을 때 실제 성능 차이가 유의미하게 나지 않는다. 
-- 단일 모델만 사용하는것이 메모리 사용량이 적고 예측속도 또한 차이가 있기에 우리가 이 프로젝트를 위해 최종적으로 사용할 모델은 랜덤포레스트가 적합하다 판단하고 있다. 
+- 단일 모델만 사용하는것이 메모리 사용량이 적고 예측속도 또한 차이가 있기에 우리가 이 프로젝트를 위해 최종적으로 사용할 모델은 랜덤포레스트가 적합하다 판단하였다. 
+
+**Random Forest Regressor 학습 결과**
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img src="./readme_images/rfg_graph.png" width="45%">
+    <img src="./readme_images/rfg_feature.png" width="45%">
+</div>
+
+* `Random Forest Regressor`를 통해 학습한 결과, 가장 큰 영향을 미친 변수는 `Under_five_deaths`(5세 미만 사망률)였으며, 성인 사망률도 일정 부분 영향을 미친 것으로 나타났다. 
+* 그 외 변수들은 큰 영향을 미친 것으로 보이지 않지만, 그 중에서 `Incidents_HIV`(HIV 발생률)는 비교적 미미한 영향을 끼친 것으로 확인되었다.
 
 ---
 
