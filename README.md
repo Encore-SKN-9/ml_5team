@@ -54,7 +54,7 @@
 
 # 💗Project Overview
 ### 프로젝트명
-- 기대수명 예측 모델 
+**Predicting Life Expectancy**
 
 ### 프로젝트 배경
 <div align="center">
@@ -254,27 +254,19 @@ r2_score:  0.9684012545661528
 * 설명변수들 간에 높은 상관관계가 있을 경우 다중공선성(Multicollinearity) 문제 발생 가능. 
   * 이를 해결하기 위해 VIF(Variance Inflation Factor) 점수를 확인하여, 높은 점수를 가진 변수를 선택적으로 제거.
 
-| Variable                      | VIF           |
-|-------------------------------|---------------|
-| Year                           | 5979.413761   |
-| Infant_deaths                  | 51.545600     |
-| Under_five_deaths              | 61.300625     |
-| Adult_mortality                | 27.191129     |
-| Alcohol_consumption            | 2.708740      |
-| Hepatitis_B                    | 4.133808      |
-| Measles                        | 1.867686      |
-| BMI                            | 2.978077      |
-| Polio                          | 24.151475     |
+| Variable                      | VIF           |  Variable                      | VIF           |
+|-------------------------------|---------------|-------------------------------|---------------|
+| Year                           | 5979.413761   |Incidents_HIV                  | 2.914893      |
+| Infant_deaths                  | 51.545600     | GDP_per_capita                 | 2.571161      |
+| Under_five_deaths              | 61.300625     | Population_mln                 | 1.190803      |
+| Adult_mortality                | 27.191129     | Thinness_ten_nineteen_years    | 40.783668     |
+| Alcohol_consumption            | 2.708740      | Thinness_five_nine_years       | 40.943215     |
+| Hepatitis_B                    | 4.133808      | Schooling                      | 5.023130      |
+| Measles                        | 1.867686      | Economy_status                 | 3.071527      |
+| BMI                            | 2.978077      | Life_expectancy                | 59.579734     |
+| Polio                          | 24.151475     | Country_encoded                | 1.064154      |
 | Diphtheria                     | 26.706093     |
-| Incidents_HIV                  | 2.914893      |
-| GDP_per_capita                 | 2.571161      |
-| Population_mln                 | 1.190803      |
-| Thinness_ten_nineteen_years    | 40.783668     |
-| Thinness_five_nine_years       | 40.943215     |
-| Schooling                      | 5.023130      |
-| Economy_status                 | 3.071527      |
-| Life_expectancy                | 59.579734     |
-| Country_encoded                | 1.064154      |
+
 
 * VIF점수 확인을 통해 제거한 변수는 다음과 같다.
 * `Year`, `Infant_deaths`, `Thinness_five_nine_years`, `Country_encoded`, `Country`, `Region`
