@@ -26,8 +26,8 @@
 | **분류**         | **기술/도구**                                                                            |
 |------------------|------------------------------------------------------------------------------------------|
 | **언어**         | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python)     |
-| **라이브러리**   | ![NumPy](https://img.shields.io/badge/numpy-013243?style=for-the-badge&logo=numpy)       ![Pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas)   ![Matplotlib](https://img.shields.io/badge/Matplotlib-ffffff?style=for-the-badge&logo=Matplotlib) ![Folium](https://img.shields.io/badge/Folium-77B829?style=for-the-badge&logo=folium&logoColor=white) |
-| **협업 툴**      | ![GitHub](https://img.shields.io/badge/github-121011?style=for-the-badge&logo=github)   ![Git](https://img.shields.io/badge/git-F05033?style=for-the-badge&logo=git)          |
+| **라이브러리**   | ![NumPy](https://img.shields.io/badge/numpy-013243?style=for-the-badge&logo=numpy)       ![Pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas)   ![Matplotlib](https://img.shields.io/badge/Matplotlib-ffffff?style=for-the-badge&logo=Matplotlib) ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white) |
+| **협업 툴**      | ![GitHub](https://img.shields.io/badge/github-121011?style=for-the-badge&logo=github)   ![Git](https://img.shields.io/badge/git-F05033?style=for-the-badge&logo=git) ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)         |
 
 <br>
 
@@ -203,11 +203,17 @@ r2_score:  0.9684012545661528
 
 
 ### 5. 프로젝트 기대 효과
-- 기존의 경험적 추론에 의존하지 않고, 데이터 기반으로 보다 신뢰성 높은 예측을 제공
+- 본 프로젝트에서는 기존의 경험적 추론에 의존하지 않고, 데이터 기반으로 보다 신뢰성 높은 예측을 제공
+
+- 추후에 본프로젝트에서 더 나아가서 기대수명 증가로 인한 연금 수급자 증가 문제를 예측하고, 국민연금 개혁 및 고령화 사회 대비 정책 수립에 기여할 수 있다.
+  >- 연금 지급 시기를 조정하거나 자동안정화장치 등의 정책을 적용하는 근거 자료로 활용 가능.
+
 - 경제적 요소와 보건적 요소가 기대수명에 미치는 관계를 시각화하여 보건과 경제 발전이 기대수명에 미치는 영향을 평가
-- 국가별로 기대수명이 예측되면, 정책 수립에 있어 중요한 참고자료로 이용 가능
-- 국가 간 건강 격차를 수치화하여 국제 기구(WHO, UN 등) 정책 수립 지원
-- 저개발국가의 기대수명 향상을 위한 효과적인 개입 전략 제안 가능
+
+- 국가 적 차원에서 보았을 때는 국가 간 건강 격차를 수치화하여 국제 기구(WHO, UN 등) 정책 수립 지원 가능
+  >- 국가별로 기대수명이 예측되면, 정책 수립에 있어 중요한 참고자료로 이용 가능
+  >- 저개발국가의 기대수명 향상을 위한 효과적인 개입 전략 제안 가능
+
 
 
 
