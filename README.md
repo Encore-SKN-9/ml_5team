@@ -280,7 +280,7 @@ X_test_scaled = scaler.transform(X_test)
 
 ### 🔎Model Training and Evaluation
 >모든 모델은 `GridSearchCV`를 활용하여 최적의 하이퍼파라미터를 찾은 후 학습을 진행.
-#### 1. LinearRegressor
+#### *1. LinearRegressor*
 <code>lr_model.fit(X_train_scaled, y_train)</code>
 
 ##### 성능 평가
@@ -309,7 +309,7 @@ r2_score:  0.9877339630657576
 - 선형회귀 모델은 평가 지표에선 뛰어난 성능을 보이는 반면 예측값에선 큰 오차 범위를 보여주고 있다.
 - 아까와 같이 선형 모델에서 이런건지 다른 모델을 학습해보면서 확인해볼 예정이다.
 
-#### XGBoost Regressor
+#### *2. XGBoost Regressor*
 
 `xgb_model = xgb.XGBRegressor(random_state=42)`
 
@@ -336,7 +336,8 @@ r2_score:  0.9753758912867433
 - XGBoost 모델은 평가 지표에선 기본 선형회귀보다 낮은 성능을 보이는 반면 예측값에선 적은 오차 범위를 보여주고 있다.
 - 전처리를 하기 전과 비교해보았을 때는 나은 성능을 보이는 것을 확인된다.
 
-#### Random Forest Regressor
+
+#### *3. Random Forest Regressor*
 <code>rf_model = RandomForestRegressor(random_state=42)</code>
 
 ##### 모델 평가
@@ -363,7 +364,7 @@ r2_score:  0.975561288394381
 ##### 피드백
 - Random Forest 모델 또한 평가 지표상에선 기본 선형회귀보다 낮은 성능을 보이는 반면 실제 예측 오차는 0.2로 가장 적은 오차 범위를 보여주고 있다.
 
-#### VotingRegressor
+#### *4. VotingRegressor*
 * `RandomForestRegressor`와 `GradientBoostingRegressor` 모델을 학습시킨 후, `VotingRegressor를` 사용하여 앙상블을 수행
 
 ```python
