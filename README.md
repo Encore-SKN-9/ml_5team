@@ -4,7 +4,7 @@
 
 ---
 
-# 💗팀 소개
+# 💗Team Introduce
 ### 🎃팀명: 생명의 방정식 🍀<br>
 ### 🐱팀원
 
@@ -21,7 +21,7 @@
 
 ---
 
-# 💗 **기술 스택**  
+# 💗 **Tech Stack**  
 
 | **분류**         | **기술/도구**                                                                            |
 |------------------|------------------------------------------------------------------------------------------|
@@ -32,7 +32,7 @@
 <br>
 
 ---
-# 💗목차
+# 💗Contents
 ### 1. 프로젝트 개요
 - 프로젝트명
 - 프로젝트 배경
@@ -52,7 +52,7 @@
 
 ---
 
-# 💗프로젝트 개요
+# 💗Project Overview
 ### 프로젝트명
 - 기대수명 예측 모델 
 
@@ -79,7 +79,7 @@
 ---
 
 # 💗Machine Learning
-## ✅ML 진행 절차
+## ✅ML Process
 ### 1. 데이터셋 개요<br>
 * 해당 데이터셋은 다양한 국가의 평균 수명에 영향을 미치는 데이터를 통합한 것으로, 사회경제적 요인과 건강 관련 지표도 함께 제공한다.
 **데이터 출처**
@@ -130,10 +130,10 @@
 
 ---
 
-## 피드백 전
+## Before Feedback
 
-###  데이터 전처리
-- 기본적인 데이터 전처리 진행
+###  Data Preprocessing
+- **기본적인 데이터 전처리 진행**
 - 영향이 적을것 같은 데이터 임의로 제거
   - 나라명, 대륙명, 연도 제거
 <code>columns_to_drop = ['Country', 'Region', 'Year']</code>
@@ -143,7 +143,7 @@
 <code>X_train_scaled = scaler.fit_transform(X_train)</code>
 <code>X_test_scaled = scaler.transform(X_test)</code>
 
-### 모델 학습 및 평가
+### Model Training and Evaluation
 #### ***1. 선형 회귀 모델 (Linear Regressor)***
 
 <code>li_reg = LinearRegression()</code>
@@ -223,9 +223,69 @@ r2_score:  0.9684012545661528
   - 선형 모델은 평가지표에 해당하는 수치를 최소화하는 방식으로 학습하고 데이터 간 비선형 데이터가 존재할수 있기에 더 자세하게 데이터를 분석하고 학습을 위한 훈련 데이터로서 처리하는 방식으로 다시 모델을 학습시킬 계획이다.
 
 ---
-## 피드백 후
-### 데이터 전처리
-- 여기 작성 예정
+## After Feedback
+### Data Preprocessing
+**Encoding**
+* 범주형 변수인 `Region`, `Country`에 한하여 인코딩 적용
+  * `Region`에 대해 원-핫 인코딩 적용 
+  ```python
+  pd.get_dummies(df['Region'], prefix='Region')
+  ```
+  * `Country`에 대해 라벨 인코딩 적용 
+  ```python
+
+  label_encoder = LabelEncoder()
+  df['Country_encoded'] = label_encoder.fit_transform(df['Country'])
+  ```
+  >`Country` 컬럼에 원-핫 인코딩 적용시 차원수가 급격히 증가하기에 라벨 인코딩 선택
+
+**Correlation Analysis & Feature Selection**
+* 기대수명과 수치형 변수간의 상관계수 계산
+`corr_matrix = numeric_df.corr()`
+
+<div align="center">
+  <img src="./readme_images/output.png" height="70%" width="70%">
+</div>
+
+* 기대수명과 중간 이상의 상관관계가 존재하는 변수만 선택
+
+**Multicollinearity Removal**
+* 설명변수들 간에 높은 상관관계가 있을 경우 다중공선성(Multicollinearity) 문제 발생 가능. 
+  * 이를 해결하기 위해 VIF(Variance Inflation Factor) 점수를 확인하여, 높은 점수를 가진 변수를 선택적으로 제거.
+
+| Variable                      | VIF           |
+|-------------------------------|---------------|
+| Year                           | 5979.413761   |
+| Infant_deaths                  | 51.545600     |
+| Under_five_deaths              | 61.300625     |
+| Adult_mortality                | 27.191129     |
+| Alcohol_consumption            | 2.708740      |
+| Hepatitis_B                    | 4.133808      |
+| Measles                        | 1.867686      |
+| BMI                            | 2.978077      |
+| Polio                          | 24.151475     |
+| Diphtheria                     | 26.706093     |
+| Incidents_HIV                  | 2.914893      |
+| GDP_per_capita                 | 2.571161      |
+| Population_mln                 | 1.190803      |
+| Thinness_ten_nineteen_years    | 40.783668     |
+| Thinness_five_nine_years       | 40.943215     |
+| Schooling                      | 5.023130      |
+| Economy_status                 | 3.071527      |
+| Life_expectancy                | 59.579734     |
+| Country_encoded                | 1.064154      |
+
+* VIF점수 확인을 통해 제거한 변수는 다음과 같다.
+* `Year`, `Infant_deaths`, `Thinness_five_nine_years`, `Country_encoded`, `Country`, `Region`
+
+**Scailing**
+```python
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+```
+* `StandardScaler() 적용`
+
 ### 모델 학습 및 평가
 - 여기 작성 예정
 
