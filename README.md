@@ -39,10 +39,16 @@
 
 ### 프로젝트 배경
 <div align="center">
-  <img src="./readme_images/뉴스기사.png" height="70%" width="70%">
+  <img src="./readme_images/뉴스기사.jpg" height="70%" width="70%">
 </div>
 
-[Click here for more information](https://www.yna.co.kr/view/AKR20240806040000017)
+[Click here for more information](https://www.hankyung.com/article/2024081677641)
+
+* 보고서에 따르면 2070년 기대수명이 90세까지 증가할 것으로 예상되며, 2050년부터 국민연금 수급자가 가입자를 초과하는 현상이 발생한다.
+
+* 연금 기금 고갈 문제를 해결하기 위해 자동안정화장치와 같은 정책적 대안이 논의되고 있으나, 이러한 정책의 효과를 사전에 분석하고 준비하기 위해서는 **정확한 기대수명 예측이 필수적이다.**
+  
+* 정확한 기대수명 예측은 기대수명 변화에 따른 연금 지급액 조정, 보험료율 조정 등의 정책 설계를 위한 근거 자료로 활용될 수 있다.
 
 ### 프로젝트 목표
 - 머신러닝의 모델을 활용하여 기대수명 예측하는 모델을 개발하는 것을 목표로 한다.
@@ -60,6 +66,49 @@
 **데이터 출처**
 [![Kaggle](https://img.shields.io/badge/Kaggle-Dataset-blue?logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/shreyasg23/life-expectancy-averaged-dataset/code)
 <br>
+
+
+<table>
+  <tr>
+    <td>
+
+
+| 변수명 | 데이터 타입 | 설명 |
+|--------|------------|------|
+| **분석 타겟 컬럼** | | |
+| `Life_expectancy` | float | 기대수명 |
+| **유아, 청소년 관련 변수** | | |
+| `Infant_deaths` | float | 영아 사망 수 |
+| `Under_five_deaths` | float | 5세 이하 사망 수 |
+| `Polio` | float | 소아마비 예방접종률 |
+| `Thinness_five_nine_years` | float | 5-9세 저체중 비율 |
+| `Thinness_ten_nineteen_years` | float | 10-19세 저체중 비율 |
+| **건강 관련 변수** | | |
+| `Diphtheria` | float | 디프테리아 예방접종률 |
+| `Incidents_HIV` | float | HIV 발생 건수 |
+| `Hepatitis_B` | float | B형 간염 예방접종률 |
+| `Measles` | float | 홍역 사례 수 |
+   </td>
+   <td>
+
+| 변수명 | 데이터 타입 | 설명 |
+|--------|------------|------|
+| **경제적 사회적 요인 변수** | | |
+| `Country` | object | 국가명 |
+| `Region` | object | 지역명 |
+| `GDP_per_capita` | float | 1인당 GDP |
+| `Population_mln` | float | 인구 (백만 명 단위) |
+| **생활 수준 및 습관 관련 변수** | | |
+| `BMI` | float | 평균 BMI(체질량지수) |
+| `Schooling` | float | 평균 교육 연수 |
+| `Economy_status` | object | 경제 상태 |
+| `Alcohol_consumption` | float | 1인당 알코올 소비량 |
+| `Adult_mortality` | float | 성인 사망률 |
+
+   </td>
+  </tr>
+</table>
+
 
 ### 2. 데이터 전처리
 
