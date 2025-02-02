@@ -279,7 +279,58 @@ X_test_scaled = scaler.transform(X_test)
 * `StandardScaler() 적용`
 
 ### 모델 학습 및 평가
-- 여기 작성 예정
+#### 1. LinearRegressor
+<code>lr_model.fit(X_train_scaled, y_train)</code>
+
+##### 성능 평가
+
+<code>evaluataion(y_test, y_pred_lr)</code>
+
+```explain Text
+mse:  1.139436016032065
+rmse:  1.0674436828386147
+mae:  0.8472948536170891
+msle:  0.0002589393244357859
+rmsle:  0.016091591730956447
+r2_score:  0.9873098835237242
+```
+<img src='./readme_images/after_lin_reg_graph.png'>
+
+##### 예측 결과
+<code>korea_pred(lr_model)</code>
+```explain Text
+예측값: 82.0038065081785
+실제값: 79.16
+예측 오차: 2.8438065081785027
+```
+
+##### 피드백
+- 선형회귀 모델은 평가 지표에선 뛰어난 성능을 보이는 반면 예측값에선 큰 오차 범위를 보여주고 있다.
+- 아까와 같이 선형 모델에서 이런건지 다른 모델을 학습해보면서 확인해볼 예정이다.
+
+#### Random Forest Regressor
+<code>rf_model = RandomForestRegressor(random_state=42)</code>
+
+##### 모델 평가
+<code>evaluataion(y_test, y_pred_rf)</code>
+```plain Text
+mse:  1.8272709023437845
+rmse:  1.3517658459747326
+mae:  1.1317534722222404
+msle:  0.00046381813291127304
+rmsle:  0.021536437330981022
+r2_score:  0.9796493350585824
+```
+<img src='./readme_images/after_rfg_graph.png'>
+
+##### 예측 결과
+<code>korea_pred(rf_model)</code>
+```plain Text
+예측값: 79.707
+실제값: 79.16
+예측 오차: 0.546999999999997
+```
+
 
 ### 최종 피드백 및 모델 선정
 - 여기 작성 예정
