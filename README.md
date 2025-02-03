@@ -129,7 +129,7 @@
 
 ---
 
-## ☑️Before Feedback
+## ✅Before Feedback
 
 ###  🔎Data Preprocessing
 - **기본적인 데이터 전처리 진행**
